@@ -10,7 +10,10 @@ SRC_DIR		=	src/
 
 OBJ_DIR		=	obj/
 
-FILES		=	main
+FILES		=	main			\
+				error			\
+				utils			\
+				init
 
 DEF			=	"\033[0m"
 BG_GREEN	=	"\033[48;2;0;200;0m"
@@ -30,6 +33,7 @@ SUCCESS = 5
 all			:	progress
 
 progress	:
+	@clear
 	@mkdir -p $(OBJ_DIR)
 	@tput cup $(PROG) 0
 	@echo -n $(DEF)$(FG_BLUE)Compiling $(FG_GREEN)$(NAME)$(DEF) "                                                   "
@@ -73,6 +77,7 @@ progress	:
 	@rm -f compil.log
 
 progress_vg	:
+	@clear
 	@mkdir -p $(OBJ_DIR)
 	@tput cup $(PROG) 0
 	@echo -n $(DEF)$(FG_BLUE)Compiling $(FG_GREEN)$(NAME)$(DEF) "                                                   "
@@ -116,6 +121,7 @@ progress_vg	:
 	@rm -f compil.log
 
 progress_clean	:
+	@clear
 	@tput cup $(PROG) 0
 	@echo -n $(DEF)$(FG_RED)Cleaning $(FG_GREEN)$(NAME)$(DEF) "                                                   "
 	@tput cup $(TOP) 0

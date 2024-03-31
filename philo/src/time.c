@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/30 14:15:17 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/03/31 13:36:20 by jde-meo          ###   ########.fr       */
+/*   Created: 2024/03/31 13:39:37 by jde-meo           #+#    #+#             */
+/*   Updated: 2024/03/31 13:51:15 by jde-meo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-void	free_main(t_main *main)
+size_t	get_time(void)
 {
-	if (!main)
-		return ;
-	if (main->philos)
-		free(main->philos);
-	if (main->forks)
-		free(main->forks);
+	struct timeval	time;
+	size_t			t;
+
+	if (gettimeofday(&time, NULL) == -1)
+		write(2, "gettimeofday() error\n", 22);
+	t = time.tv_sec * 1000 + time.tv_usec / 1000;
+	return (t);
 }
 
-int	main(int ac, char **av)
+int	sleep_ms(size_t ms)
 {
-	t_main	main;
+	size_t	start;
 
-	init(ac, av, &main);
+	start = get_time();
+	while ((get_time() - start) < ms)
+		usleep(ms / 10);
+	return (0);
 }

@@ -6,37 +6,48 @@
 /*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 15:09:31 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/03/30 15:10:03 by jde-meo          ###   ########.fr       */
+/*   Updated: 2024/03/31 13:25:03 by jde-meo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isspace(char c)
+#include <philo.h>
+
+void	clear_data(void	*data, size_t size)
+{
+	char	*d;
+	size_t	i;
+
+	i = 0;
+	d = (char *)data;
+	while (i < size)
+		d[i++] = 0;
+}
+
+char	ft_isspace(char c)
 {
 	return ((c >= 9 && c <= 13) || c == ' ');
 }
 
-int	ft_atoi(const char *nptr)
+size_t	ft_atoi(char *str)
 {
-	int		i;
-	int		signe;
-	int		nbr;
+	size_t	s;
+	size_t	n;
 
-	i = 0;
-	signe = 1;
-	nbr = 0;
-	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == ' ')
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	s = 1;
+	n = 0;
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		if (nptr[i] == '-')
-			signe = -1;
-		i++;
+		if (*str == '-')
+			s = -1;
+		str++;
 	}
-	while (nptr[i] >= '0' && nptr[i] <= '9')
+	while (*str >= '0' && *str <= '9')
 	{
-		nbr *= 10;
-		nbr += (nptr[i] - 48);
-		i++;
+		n *= 10;
+		n += (*str - '0');
+		str++;
 	}
-	return (nbr * signe);
+	return (n * s);
 }
