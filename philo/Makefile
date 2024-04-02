@@ -13,7 +13,10 @@ OBJ_DIR		=	obj/
 FILES		=	main			\
 				error			\
 				utils			\
-				init
+				init			\
+				thread			\
+				philo			\
+				time
 
 DEF			=	"\033[0m"
 BG_GREEN	=	"\033[48;2;0;200;0m"

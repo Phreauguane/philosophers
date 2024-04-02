@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 14:14:53 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/03/31 13:47:52 by jde-meo          ###   ########.fr       */
+/*   Updated: 2024/04/02 14:57:02 by larz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ typedef struct s_worker
 	int				philos;
 	int				meals;
 	int				max_meals;
-	char			is_eating;
-	char			*dead;
 	size_t			time_of_meal;
 	size_t			to_die;
 	size_t			to_eat;
@@ -47,19 +45,19 @@ typedef struct s_worker
 	pthread_mutex_t	*fork1;
 	pthread_mutex_t	*fork2;
 	pthread_mutex_t	*write_l;
-	pthread_mutex_t	*dead_l;
 	pthread_mutex_t	*meal_l;
+	struct s_main	*main;
 	pthread_t		thread;
 }	t_worker;
 
 typedef struct s_main
 {
-	t_worker		*observer;
 	t_worker		*philos;
 	int				amount;
 	char			dead;
+	char			miam;
+	size_t			time_of_start;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	dead_l;
 	pthread_mutex_t	meal_l;
 	pthread_mutex_t	write_l;
 }	t_main;
@@ -88,6 +86,15 @@ void	init(int ac, char **av, t_main *main);
 
 //		<TIME.C>		//
 size_t	get_time(void);
-int		sleep_ms(size_t ms);
+int		sleep_ms(size_t ms, t_main *main);
+
+//		<THREAD.C>		//
+void	launch(t_main *main);
+void	exit_main(t_main *main);
+
+//		<PHILO.C>		//
+void	*philo_work(void *void_main);
+void	check_death(t_main *main);
+void	print_action(t_main *main, int i, char *action);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 14:15:17 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/03/31 13:36:20 by jde-meo          ###   ########.fr       */
+/*   Updated: 2024/04/02 14:38:25 by larz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,6 @@ int	main(int ac, char **av)
 	t_main	main;
 
 	init(ac, av, &main);
+	launch(&main);
+	free_main(&main);
 }

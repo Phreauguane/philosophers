@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 12:41:28 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/03/31 13:38:42 by jde-meo          ###   ########.fr       */
+/*   Updated: 2024/04/02 14:57:05 by larz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	dup_data(t_worker *philo, t_main *main, t_init init, int i)
 	philo->to_sleep = init.to_slp;
 	philo->max_meals = init.max_meals;
 	philo->write_l = &(main->write_l);
-	philo->dead_l = &(main->dead_l);
 	philo->meal_l = &(main->meal_l);
 	philo->id = i + 1;
 }
@@ -55,18 +54,16 @@ void	create_philos(t_init init, t_main *main)
 	int	i;
 
 	i = -1;
-	main->philos = malloc(sizeof(t_worker) * (init.philos + 1));
-	main->observer = &(main->philos[init.philos]);
+	main->philos = malloc(sizeof(t_worker) * init.philos);
 	main->amount = init.philos;
 	main->forks = malloc(sizeof(pthread_mutex_t) * init.philos);
 	while (++i < init.philos)
 	{
 		dup_data(&(main->philos[i]), main, init, i);
+		main->philos[i].main = main;
 		main->philos[i].fork1 = &(main->forks[i]);
-		if (i < init.philos - 1)
-			main->philos[i].fork2 = &(main->forks[i + 1]);
+		main->philos[i].fork2 = &(main->forks[(i + 1) % init.philos]);
 	}
-	main->philos[init.philos - 1].fork2 = &(main->forks[0]);
 }
 
 void	init(int ac, char **av, t_main *main)

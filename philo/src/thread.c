@@ -3,16 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 13:39:16 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/03/31 14:28:04 by jde-meo          ###   ########.fr       */
+/*   Updated: 2024/04/02 14:57:16 by larz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-void	create_threads(t_main *main)
+void	create_mutex(t_main *main)
 {
-	// faire cette crisse fonction
+	int	i;
+
+	i = -1;
+	pthread_mutex_init(&(main->write_l), NULL);
+	pthread_mutex_init(&(main->meal_l), NULL);
+	while (++i < main->amount)
+		pthread_mutex_init(&(main->forks[i]), NULL);
+}
+
+void	launch(t_main *main)
+{
+	int	i;
+
+	i = -1;
+	create_mutex(main);
+	main->time_of_start = get_time();
+	while (++i < main->amount)
+	{
+		pthread_create(&(main->philos[i].thread), NULL,
+			philo_work, (void *)&(main->philos[i]));
+		main->philos[i].time_of_start = get_time();
+		main->philos[i].time_of_meal = main->philos[i].time_of_start;
+	}
+	check_death(main);
+	exit_main(main);
+}
+
+void	exit_main(t_main *main)
+{
+	int	i;
+
+	i = -1;
+	while (++i < main->amount)
+		pthread_join(main->philos[i].thread, NULL);
+	pthread_mutex_destroy(&(main->write_l));
+	pthread_mutex_destroy(&(main->meal_l));
+	i = -1;
+	while (++i < main->amount)
+		pthread_mutex_destroy(&(main->forks[i]));
 }
