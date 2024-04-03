@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 12:41:28 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/04/02 14:57:05 by larz             ###   ########.fr       */
+/*   Updated: 2024/04/03 17:35:58 by jde-meo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	init(int ac, char **av, t_main *main)
 {
 	t_init	init;
 
+	clear_data(main, sizeof(t_main));
 	exit_error(check_input(ac, av), NULL);
 	init.philos = (int)ft_atoi(av[1]);
 	init.to_die = (int)ft_atoi(av[2]);

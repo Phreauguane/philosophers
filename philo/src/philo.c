@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 13:22:09 by larz              #+#    #+#             */
-/*   Updated: 2024/04/02 14:50:18 by larz             ###   ########.fr       */
+/*   Updated: 2024/04/03 17:26:07 by jde-meo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,14 @@ void	*philo_work(void *void_p)
 	p = (t_worker *)void_p;
 	main = p->main;
 	if (p->id % 2)
-		usleep(15000);
-	while (!main->dead)
+		sleep_ms(p->to_eat, main);
+	while (!main->dead && !main->miam)
 	{
 		miam(p);
-		if (main->miam)
-			break ;
 		print_action(main, p->id, "is sleeping");
 		sleep_ms(p->to_sleep, main);
 		print_action(main, p->id, "is thinking");
+		sleep_ms(10, main);
 	}
 	return (NULL);
 }
