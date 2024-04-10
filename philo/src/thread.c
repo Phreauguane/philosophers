@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 13:39:16 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/04/03 17:23:50 by jde-meo          ###   ########.fr       */
+/*   Updated: 2024/04/08 14:37:15 by larz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	launch(t_main *main)
 
 	i = -1;
 	create_mutex(main);
-	main->time_of_start = get_time();
+	main->start = get_time();
 	while (++i < main->amount)
 	{
 		pthread_create(&(main->philos[i].thread), NULL,
 			philo_work, (void *)&(main->philos[i]));
 		main->philos[i].time_of_start = get_time();
-		main->philos[i].time_of_meal = main->philos[i].time_of_start;
+		main->philos[i].time_of_meal = 0;
 	}
 	check_death(main);
 	exit_main(main);

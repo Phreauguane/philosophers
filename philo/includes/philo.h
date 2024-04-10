@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 14:14:53 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/04/03 17:14:16 by jde-meo          ###   ########.fr       */
+/*   Updated: 2024/04/08 14:34:04 by larz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_main
 	int				amount;
 	char			dead;
 	char			miam;
-	size_t			time_of_start;
+	size_t			start;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	meal_l;
 	pthread_mutex_t	write_l;
@@ -87,7 +87,8 @@ void	init(int ac, char **av, t_main *main);
 //		<TIME.C>		//
 size_t	get_time(void);
 int		sleep_ms(size_t ms, t_main *main);
-size_t	get_time_us(void);
+size_t	get_time2(t_main *main);
+void	sleep_ms_from(size_t start, size_t ms, t_main *main);
 
 //		<THREAD.C>		//
 void	launch(t_main *main);
