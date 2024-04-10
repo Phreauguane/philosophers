@@ -6,7 +6,7 @@
 /*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 15:09:31 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/03/31 13:25:03 by jde-meo          ###   ########.fr       */
+/*   Updated: 2024/04/10 15:08:45 by jde-meo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@ void	clear_data(void	*data, size_t size)
 char	ft_isspace(char c)
 {
 	return ((c >= 9 && c <= 13) || c == ' ');
+}
+
+void	print_action(t_main *main, int i, char *action)
+{
+	pthread_mutex_lock(&(main->write_l));
+	if (!main->dead)
+		printf(" %-6lu | %-5d | %s\n", get_time2(main),
+			i + 1, action);
+	pthread_mutex_unlock(&(main->write_l));
 }
 
 size_t	ft_atoi(char *str)

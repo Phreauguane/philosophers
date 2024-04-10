@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 14:14:53 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/04/08 14:34:04 by larz             ###   ########.fr       */
+/*   Updated: 2024/04/10 15:08:55 by jde-meo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct s_worker
 	size_t			to_die;
 	size_t			to_eat;
 	size_t			to_sleep;
-	size_t			time_of_start;
 	pthread_mutex_t	*fork1;
 	pthread_mutex_t	*fork2;
 	pthread_mutex_t	*write_l;
@@ -80,6 +79,7 @@ void	exit_error(int error, t_main *main);
 //		<UTILS.C>		//
 size_t	ft_atoi(char *str);
 void	clear_data(void	*data, size_t size);
+void	print_action(t_main *main, int i, char *action);
 
 //		<INIT.C>		//
 void	init(int ac, char **av, t_main *main);
@@ -97,6 +97,5 @@ void	exit_main(t_main *main);
 //		<PHILO.C>		//
 void	*philo_work(void *void_main);
 void	check_death(t_main *main);
-void	print_action(t_main *main, int i, char *action);
 
 #endif

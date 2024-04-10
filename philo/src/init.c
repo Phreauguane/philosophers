@@ -6,7 +6,7 @@
 /*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 12:41:28 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/04/03 17:35:58 by jde-meo          ###   ########.fr       */
+/*   Updated: 2024/04/10 14:06:59 by jde-meo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	dup_data(t_worker *philo, t_main *main, t_init init, int i)
 	philo->max_meals = init.max_meals;
 	philo->write_l = &(main->write_l);
 	philo->meal_l = &(main->meal_l);
-	philo->id = i + 1;
+	philo->id = i;
 }
 
 void	create_philos(t_init init, t_main *main)

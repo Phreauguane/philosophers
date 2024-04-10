@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 13:39:16 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/04/08 14:37:15 by larz             ###   ########.fr       */
+/*   Updated: 2024/04/10 13:52:53 by jde-meo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void	launch(t_main *main)
 	{
 		pthread_create(&(main->philos[i].thread), NULL,
 			philo_work, (void *)&(main->philos[i]));
-		main->philos[i].time_of_start = get_time();
-		main->philos[i].time_of_meal = 0;
 	}
 	check_death(main);
 	exit_main(main);
