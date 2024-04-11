@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 13:22:09 by larz              #+#    #+#             */
-/*   Updated: 2024/04/10 15:10:25 by jde-meo          ###   ########.fr       */
+/*   Updated: 2024/04/11 15:04:17 by larz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	miam(t_worker *p)
 	print_action(main, p->id, "has taken a fork");
 	pthread_mutex_lock(p->fork2);
 	print_action(main, p->id, "has taken a fork");
-	p->time_of_meal = get_time2(main);
 	pthread_mutex_lock(p->meal_l);
+	p->time_of_meal = get_time2(main);
 	print_action(main, p->id, "is eating");
 	(p->meals)++;
 	pthread_mutex_unlock(p->meal_l);
@@ -53,7 +53,7 @@ void	*philo_work(void *void_p)
 	p = (t_worker *)void_p;
 	main = p->main;
 	if (p->id % 2)
-		sleep_ms(p->to_eat, main);
+		sleep_ms(p->to_eat + 1, main);
 	while (!main->dead && !main->miam)
 	{
 		miam(p);
@@ -70,15 +70,16 @@ void	check_death(t_main *main)
 	while (!main->miam)
 	{
 		i = -1;
-		sleep_ms(2, main);
 		while (++i < main->amount && !main->dead)
 		{
+			pthread_mutex_lock(&(main->meal_l));
 			if (get_time2(main) - main->philos[i].time_of_meal
 				>= main->philos[i].to_die)
 			{
 				print_action(main, i, "died");
 				main->dead = 1;
 			}
+			pthread_mutex_unlock(&(main->meal_l));
 		}
 		if (main->dead)
 			break ;

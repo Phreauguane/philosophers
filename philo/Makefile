@@ -1,6 +1,6 @@
 .ONESHELL:
 
-NAME		=	philosophers
+NAME		=	philo
 
 CC			=	cc -Wall -Wextra -Werror
 
