@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 13:22:09 by larz              #+#    #+#             */
-/*   Updated: 2024/04/11 15:04:17 by larz             ###   ########.fr       */
+/*   Updated: 2024/04/25 17:51:07 by jde-meo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ void	hmmm(t_worker *p)
 	print_action(p->main, p->id, "is thinking");
 }
 
+void	die(t_worker *p)
+{
+	pthread_mutex_lock(p->fork1);
+	print_action(p->main, p->id, "has taken a fork");
+	sleep_ms(p->to_die, p->main);
+}
+
 void	*philo_work(void *void_p)
 {
 	t_worker	*p;
@@ -52,6 +59,8 @@ void	*philo_work(void *void_p)
 
 	p = (t_worker *)void_p;
 	main = p->main;
+	if (p->philos == 1)
+		return (die(p), NULL);
 	if (p->id % 2)
 		sleep_ms(p->to_eat + 1, main);
 	while (!main->dead && !main->miam)

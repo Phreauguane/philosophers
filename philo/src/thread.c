@@ -6,7 +6,7 @@
 /*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 13:39:16 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/04/10 13:52:53 by jde-meo          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:50:07 by jde-meo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,32 @@ void	exit_main(t_main *main)
 	i = -1;
 	while (++i < main->amount)
 		pthread_mutex_destroy(&(main->forks[i]));
+}
+
+void	check_death(t_main *main)
+{
+	int		i;
+
+	while (!main->miam)
+	{
+		i = -1;
+		sleep_ms(1, main);
+		while (++i < main->amount && !main->dead)
+		{
+			if (get_time2(main) - main->philos[i].time_of_meal
+				>= main->philos[i].to_die)
+			{
+				print_action(main, i, "died");
+				main->dead = 1;
+			}
+		}
+		if (main->dead)
+			break ;
+		i = -1;
+		while (++i < main->amount
+			&& main->philos[i].meals >= main->philos[i].max_meals)
+			;
+		if (i == main->amount)
+			main->miam = 1;
+	}
 }
