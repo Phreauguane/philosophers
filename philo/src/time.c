@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 13:39:37 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/04/08 14:36:26 by larz             ###   ########.fr       */
+/*   Updated: 2024/04/25 18:39:40 by jde-meo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	sleep_ms(size_t ms, t_main *main)
 
 	start = get_time();
 	while ((get_time() - start) < ms && !main->dead && !main->miam)
-		usleep(ms / 10);
+		usleep(ms / 20);
 	return (0);
 }
 
@@ -50,5 +50,5 @@ void	sleep_ms_from(size_t start, size_t ms, t_main *main)
 
 	s = start + main->start;
 	while ((get_time() - s) < ms && !main->dead && !main->miam)
-		usleep(ms / 10);
+		usleep(ms / 20);
 }

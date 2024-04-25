@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 15:09:31 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/04/11 14:59:43 by larz             ###   ########.fr       */
+/*   Updated: 2024/04/25 18:49:11 by jde-meo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,19 @@ char	ft_isspace(char c)
 
 void	print_action(t_main *main, int i, char *action)
 {
-	//pthread_mutex_lock(&(main->write_l));
+	pthread_mutex_lock(&(main->write_l));
 	if (!main->dead)
-		printf(" %-6lu | %-5d | %s\n", get_time2(main),
+		printf("%lu %d %s\n", get_time2(main),
 			i + 1, action);
-	//pthread_mutex_unlock(&(main->write_l));
+		//printf(" %-6lu | %-5d | %s\n", get_time2(main),
+		//	i + 1, action);
+	pthread_mutex_unlock(&(main->write_l));
+}
+
+void	print_action_time(t_main *main, int i, size_t time, char *action)
+{
+	if (!main->dead)
+		printf("%lu %d %s\n", time, i + 1, action);
 }
 
 size_t	ft_atoi(char *str)

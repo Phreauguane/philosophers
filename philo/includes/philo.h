@@ -6,7 +6,7 @@
 /*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 14:14:53 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/04/10 15:08:55 by jde-meo          ###   ########.fr       */
+/*   Updated: 2024/04/25 18:12:54 by jde-meo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	exit_error(int error, t_main *main);
 size_t	ft_atoi(char *str);
 void	clear_data(void	*data, size_t size);
 void	print_action(t_main *main, int i, char *action);
+void	print_action_time(t_main *main, int i, size_t time, char *action);
 
 //		<INIT.C>		//
 void	init(int ac, char **av, t_main *main);
