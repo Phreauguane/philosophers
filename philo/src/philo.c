@@ -6,7 +6,7 @@
 /*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 13:22:09 by larz              #+#    #+#             */
-/*   Updated: 2024/04/25 18:40:22 by jde-meo          ###   ########.fr       */
+/*   Updated: 2024/04/28 19:21:26 by jde-meo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	zzzz(t_worker *p)
 	if (p->main->dead)
 		return ;
 	t = p->time_of_meal + p->to_eat;
-	//t = get_time2(p->main);
 	print_action(p->main, p->id, "is sleeping");
 	sleep_ms_from(t, p->to_sleep, p->main);
 }

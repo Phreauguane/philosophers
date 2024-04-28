@@ -6,7 +6,7 @@
 /*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 15:09:31 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/04/25 18:49:11 by jde-meo          ###   ########.fr       */
+/*   Updated: 2024/04/28 19:21:37 by jde-meo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void	print_action(t_main *main, int i, char *action)
 	if (!main->dead)
 		printf("%lu %d %s\n", get_time2(main),
 			i + 1, action);
-		//printf(" %-6lu | %-5d | %s\n", get_time2(main),
-		//	i + 1, action);
 	pthread_mutex_unlock(&(main->write_l));
 }
 
