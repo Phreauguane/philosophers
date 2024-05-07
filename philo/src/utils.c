@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 15:09:31 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/04/28 19:21:37 by jde-meo          ###   ########.fr       */
+/*   Updated: 2024/05/07 13:31:55 by larz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,9 @@ char	ft_isspace(char c)
 
 void	print_action(t_main *main, int i, char *action)
 {
-	pthread_mutex_lock(&(main->write_l));
 	if (!main->dead)
 		printf("%lu %d %s\n", get_time2(main),
 			i + 1, action);
-	pthread_mutex_unlock(&(main->write_l));
 }
 
 void	print_action_time(t_main *main, int i, size_t time, char *action)

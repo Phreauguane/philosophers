@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jde-meo <jde-meo@student.42perpignan.fr    +#+  +:+       +#+        */
+/*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 13:22:09 by larz              #+#    #+#             */
-/*   Updated: 2024/04/28 19:21:26 by jde-meo          ###   ########.fr       */
+/*   Updated: 2024/05/07 13:25:30 by larz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,38 +18,28 @@ void	miam(t_worker *p)
 
 	main = p->main;
 	pthread_mutex_lock(p->fork1);
-	if (p->main->dead)
-		return ;
 	print_action(main, p->id, "has taken a fork");
 	pthread_mutex_lock(p->fork2);
-	p->time_of_meal = get_time2(main);
-	if (p->main->dead)
-		return ;
 	print_action(main, p->id, "has taken a fork");
+	p->time_of_meal = get_time2(main);
 	(p->meals)++;
-	if (p->main->dead)
-		return ;
 	print_action(main, p->id, "is eating");
-	sleep_ms_from(p->time_of_meal, p->to_eat, main);
+	sleep_ms(p->to_eat, main);
+	print_action(main, p->id, "j'ai fini mon boulot");
 	pthread_mutex_unlock(p->fork1);
+	print_action(main, p->id, "drop 1");
 	pthread_mutex_unlock(p->fork2);
+	print_action(main, p->id, "drop 2");
 }
 
 void	zzzz(t_worker *p)
 {
-	size_t		t;
-
-	if (p->main->dead)
-		return ;
-	t = p->time_of_meal + p->to_eat;
 	print_action(p->main, p->id, "is sleeping");
-	sleep_ms_from(t, p->to_sleep, p->main);
+	sleep_ms(p->to_sleep, p->main);
 }
 
 void	hmmm(t_worker *p)
 {
-	if (p->main->dead)
-		return ;
 	print_action(p->main, p->id, "is thinking");
 }
 
@@ -70,7 +60,7 @@ void	*philo_work(void *void_p)
 	if (p->philos == 1)
 		return (die(p), NULL);
 	if (p->id % 2)
-		sleep_ms(p->to_eat / 2, main);
+		sleep_ms(p->to_eat, main);
 	while (!main->dead && !main->miam)
 	{
 		miam(p);
