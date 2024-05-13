@@ -6,7 +6,7 @@
 /*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 14:14:53 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/05/07 13:17:31 by larz             ###   ########.fr       */
+/*   Updated: 2024/05/13 13:10:48 by larz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_main
 	t_worker		*philos;
 	int				amount;
 	char			dead;
-	char			miam;
 	size_t			start;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	meal_l;
@@ -89,7 +88,6 @@ void	init(int ac, char **av, t_main *main);
 size_t	get_time(void);
 int		sleep_ms(size_t ms, t_main *main);
 size_t	get_time2(t_main *main);
-void	sleep_ms_from(size_t start, size_t ms, t_main *main);
 
 //		<THREAD.C>		//
 void	launch(t_main *main);

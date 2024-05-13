@@ -6,7 +6,7 @@
 /*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 13:39:16 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/05/07 13:20:31 by larz             ###   ########.fr       */
+/*   Updated: 2024/05/13 13:17:32 by larz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,27 @@ void	check_death(t_main *main)
 {
 	int		i;
 
-	while (!main->miam)
+	while (!main->dead)
 	{
 		i = -1;
-		sleep_ms(1, main);
 		while (++i < main->amount && !main->dead)
 		{
+			pthread_mutex_lock(&(main->write_l));
 			if (get_time2(main) - main->philos[i].time_of_meal
 				>= main->philos[i].to_die)
 			{
 				print_action(main, i, "died");
 				main->dead = 1;
 			}
+			pthread_mutex_unlock(&(main->write_l));
 		}
-		if (main->dead)
-			break ;
-		i = -1;
-		while (++i < main->amount
+		i = 0;
+		pthread_mutex_lock(&(main->write_l));
+		while (i < main->amount && !main->dead
 			&& main->philos[i].meals >= main->philos[i].max_meals)
-			;
+			i++;
 		if (i == main->amount)
-			main->miam = 1;
+			main->dead = 1;
+		pthread_mutex_unlock(&(main->write_l));
 	}
 }
