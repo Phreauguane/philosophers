@@ -6,7 +6,7 @@
 /*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 13:39:37 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/05/13 13:10:41 by larz             ###   ########.fr       */
+/*   Updated: 2024/05/15 12:04:26 by larz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ size_t	get_time2(t_main *main)
 int	sleep_ms(size_t ms, t_main *main)
 {
 	size_t	start;
+	(void)main;
 
 	start = get_time();
-	while ((get_time() - start) < ms && !main->dead)
+	while ((get_time() - start) < ms)
 		usleep(ms / 10);
 	return (0);
 }

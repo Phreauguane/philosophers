@@ -6,7 +6,7 @@
 /*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 13:39:16 by jde-meo           #+#    #+#             */
-/*   Updated: 2024/05/13 13:17:32 by larz             ###   ########.fr       */
+/*   Updated: 2024/05/15 12:00:50 by larz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void	check_death(t_main *main)
 			if (get_time2(main) - main->philos[i].time_of_meal
 				>= main->philos[i].to_die)
 			{
-				print_action(main, i, "died");
-				main->dead = 1;
+				printf("%lu %d %s%d\b \n", get_time2(main),
+					main->philos[i].id + 1, "died", main->dead = 1);
 			}
 			pthread_mutex_unlock(&(main->write_l));
 		}

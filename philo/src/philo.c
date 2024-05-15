@@ -6,7 +6,7 @@
 /*   By: larz <larz@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 13:22:09 by larz              #+#    #+#             */
-/*   Updated: 2024/05/13 13:32:42 by larz             ###   ########.fr       */
+/*   Updated: 2024/05/15 12:05:34 by larz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	*philo_work(void *void_p)
 		pthread_mutex_lock(&(main->write_l));
 		if (main->dead)
 		{
-			print_action(main, p->id, "exit");
 			pthread_mutex_unlock(&(main->write_l));
 			return (NULL);
 		}
